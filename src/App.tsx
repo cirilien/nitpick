@@ -1,9 +1,9 @@
-import { useState } from 'react'
-import { Editor } from './components/Editor'
-import { ResultsPanel } from './components/ResultsPanel'
+import { useState } from "react";
+import { Editor } from "./components/Editor";
+import { ResultsPanel } from "./components/ResultsPanel";
 
-function App() {
-  const [text, setText] = useState('')
+const App = () => {
+  const [text, setText] = useState("");
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50 text-gray-900 dark:bg-gray-950 dark:text-gray-100">
@@ -20,7 +20,7 @@ function App() {
         </div>
       </main>
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;

@@ -1,6 +1,6 @@
 interface EditorProps {
-  text: string
-  onChange: (text: string) => void
+  text: string;
+  onChange: (text: string) => void;
 }
 
 export function Editor({ text, onChange }: EditorProps) {
@@ -11,5 +11,5 @@ export function Editor({ text, onChange }: EditorProps) {
       value={text}
       onChange={(e) => onChange(e.target.value)}
     />
-  )
+  );
 }

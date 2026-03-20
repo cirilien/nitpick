@@ -1,5 +1,5 @@
 interface ResultsPanelProps {
-  text: string
+  text: string;
 }
 
 export function ResultsPanel({ text: _text }: ResultsPanelProps) {
@@ -9,5 +9,5 @@ export function ResultsPanel({ text: _text }: ResultsPanelProps) {
         Paste or type some text to get started.
       </p>
     </div>
-  )
+  );
 }
