@@ -1,25 +1,35 @@
 import { useRef, useState } from "react";
 
 import { analysers } from "./analysis/analysers";
+import { parse } from "./analysis/parse";
 import { Editor } from "./components/Editor";
+import { debounce } from "./lib/debounce";
 import { ResultsPanel } from "./components/ResultsPanel";
 import { Toolbar } from "./components/Toolbar";
+import type { AnalysisResult } from "./boundaryTypes";
 
 const persistText = (text: string) => {
   localStorage.setItem("text", text);
 };
 
-const handleAnalyze = (): void => {};
-
 const App = () => {
   const [text, setText] = useState(localStorage.getItem("text") || "");
-
+  const [result, setResult] = useState<AnalysisResult | null>(null);
   const [selectedAnalyserId, setSelectedAnalyserId] = useState(analysers[0].id);
 
   const persist = useRef(debounce(persistText, 500));
   const onTextChange = (text: string) => {
     setText(text);
     persist.current(text);
+  };
+
+  const handleAnalyze = (): void => {
+    const analyser = analysers.find((a) => a.id === selectedAnalyserId);
+    if (!analyser) return;
+    const tree = parse(text);
+    const highlights = analyser.fn(tree);
+
+    setResult({ highlights, text, activeAnalyserId: selectedAnalyserId });
   };
 
   return (
@@ -42,7 +52,7 @@ const App = () => {
           />
         </div>
         <div className="flex-1 overflow-hidden">
-          <ResultsPanel text={"dummy result"} />
+          <ResultsPanel isStale={false} result={result} />
         </div>
       </main>
     </div>
