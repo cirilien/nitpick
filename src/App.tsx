@@ -2,11 +2,11 @@ import { useRef, useState } from "react";
 
 import { analysers } from "./analysis/analysers";
 import { parse } from "./analysis/parse";
+import type { AnalysisResult } from "./boundaryTypes";
 import { Editor } from "./components/Editor";
-import { debounce } from "./lib/debounce";
 import { ResultsPanel } from "./components/ResultsPanel";
 import { Toolbar } from "./components/Toolbar";
-import type { AnalysisResult } from "./boundaryTypes";
+import { debounce } from "./lib/debounce";
 
 const persistText = (text: string) => {
   localStorage.setItem("text", text);
