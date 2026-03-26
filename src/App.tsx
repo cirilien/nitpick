@@ -34,6 +34,8 @@ const App = () => {
     setResult({ highlights, text, activeAnalyserId: selectedAnalyserId });
   };
 
+  const isStale = result !== null && text !== result.text;
+
   const selectedAnalyser = analysers.find((a) =>
     result ? a.id === result.activeAnalyserId : a.id === selectedAnalyserId,
   );
@@ -61,7 +63,7 @@ const App = () => {
           {/* Results + Info — side by side on wide screens, stacked on narrow */}
           <div className="flex-1 min-w-0 flex flex-col min-[1430px]:flex-row gap-4 overflow-hidden">
             <div className="flex-1 min-w-0 min-h-0 overflow-hidden bg-surface-screen dark:bg-dark-surface-screen rounded-lg border-2 border-surface-border dark:border-dark-surface-border text-text-screen dark:text-dark-text-screen texture-scanlines">
-              <ResultsPanel isStale={false} result={result} />
+              <ResultsPanel isStale={isStale} result={result} />
             </div>
             <AnalyserInfo analyser={selectedAnalyser} />
           </div>
