@@ -34,7 +34,9 @@ const App = () => {
     setResult({ highlights, text, activeAnalyserId: selectedAnalyserId });
   };
 
-  const selectedAnalyser = analysers.find((a) => a.id === selectedAnalyserId);
+  const selectedAnalyser = analysers.find((a) =>
+    result ? a.id === result.activeAnalyserId : a.id === selectedAnalyserId,
+  );
 
   return (
     <div className="h-screen flex flex-col bg-surface dark:bg-dark-surface text-text dark:text-dark-text font-mono">

@@ -6,12 +6,11 @@ type HighlightedTextProps = {
 };
 
 export function HighlightedText({ text, highlights }: HighlightedTextProps) {
-  console.log(highlights);
   if (highlights.length === 0) {
     return <span className="whitespace-pre-wrap">{text}</span>;
   }
 
-  const sorted = highlights.sort((a, b) => a.start - b.start);
+  const sorted = highlights.toSorted((a, b) => a.start - b.start);
   const parts: React.ReactNode[] = [];
 
   let cursor = 0;

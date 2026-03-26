@@ -26,9 +26,9 @@ describe("analyzeWeaselWords", () => {
   });
 
   test("matches case-insensitively", () => {
-    expect(labels("Obviously it works. OBVIOUSLY.")).toEqual([
-      "Weasel word: Obviously",
-      "Weasel word: OBVIOUSLY",
+    expect(labels("Basically it works. BASICALLY.")).toEqual([
+      "Weasel word: Basically",
+      "Weasel word: BASICALLY",
     ]);
   });
 
@@ -57,11 +57,11 @@ describe("analyzeWeaselWords", () => {
   });
 
   test("positions across multiple sentences", () => {
-    const text = "She was fairly sure. He probably agreed.";
+    const text = "She was fairly sure. He practically agreed.";
     const hits = analyze(text);
     expect(hits).toHaveLength(2);
     expect(text.slice(hits[0].start, hits[0].end)).toBe("fairly");
-    expect(text.slice(hits[1].start, hits[1].end)).toBe("probably");
+    expect(text.slice(hits[1].start, hits[1].end)).toBe("practically");
   });
 
   test("returns empty array for clean text", () => {
