@@ -2,7 +2,7 @@ import { useState } from "react";
 import type { Analyser } from "../analysis/analysers";
 
 interface AnalyserInfoProps {
-  analyser: Analyser;
+  analyser: Analyser | undefined;
 }
 
 export function AnalyserInfo({ analyser }: AnalyserInfoProps) {
@@ -21,7 +21,7 @@ export function AnalyserInfo({ analyser }: AnalyserInfoProps) {
         {collapsed ? "◀" : "▶"}
       </button>
 
-      {!collapsed && (
+      {!collapsed && analyser && (
         <div className="px-5 py-3 min-[1430px]:pb-5 min-[1430px]:pt-0 text-sm">
           <h2 className="font-semibold text-base mb-1">{analyser.name}</h2>
           <p className="text-text-muted dark:text-dark-text-muted text-xs mb-3">
