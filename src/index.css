@@ -1,1 +1,41 @@
 @import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+	/* Light mode palette */
+	--color-surface: #faf6f1;
+	--color-surface-raised: #fff8f2;
+	--color-surface-border: #e8ddd0;
+	--color-text: #2c2416;
+	--color-text-muted: #8a7e6b;
+	--color-accent: #c4582a;
+	--color-accent-hover: #a84820;
+
+	/* Dark mode palette */
+	--color-dark-surface: #1a1f1a;
+	--color-dark-surface-raised: #232a23;
+	--color-dark-surface-border: #3a4238;
+	--color-dark-text: #ddd8cf;
+	--color-dark-text-muted: #8a9182;
+	--color-dark-accent: #d4714a;
+	--color-dark-accent-hover: #e07f58;
+
+	/* Fonts */
+	--font-serif: var(--font-pairing-serif), Georgia, serif;
+	--font-mono: var(--font-pairing-mono), monospace;
+}
+
+:root {
+	--font-pairing-serif: "Lora";
+	--font-pairing-mono: "Space Mono";
+}
+
+@keyframes blink {
+	0%, 100% { opacity: 1; }
+	50% { opacity: 0; }
+}
+
+.animate-blink {
+	animation: blink 0.8s step-end 4;
+}
