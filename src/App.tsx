@@ -38,12 +38,12 @@ const App = () => {
 
   return (
     <div className="h-screen flex flex-col bg-surface dark:bg-dark-surface text-text dark:text-dark-text font-mono">
-      <div className="app w-full mx-auto flex flex-col flex-1 overflow-hidden lg:p-10 xl:p-16">
+      <div className="app w-full mx-auto flex flex-col flex-1 overflow-hidden lg:p-8 xl:p-10">
         <Header />
 
         <main className="flex-1 flex gap-4 overflow-hidden p-4 pt-4">
           {/* Editor — grain, light border */}
-          <div className="flex flex-col w-[480px] shrink-0 bg-surface-raised dark:bg-dark-surface-raised rounded-lg border border-dashed border-surface-border dark:border-dark-surface-border texture-grain">
+          <div className="flex flex-col w-[40%] max-w-[480px] min-w-0 overflow-hidden bg-surface-raised dark:bg-dark-surface-raised rounded-lg border border-dashed border-surface-border dark:border-dark-surface-border texture-grain">
             <div className="flex-1 min-h-0 p-5">
               <Editor text={text} onChange={onTextChange} />
             </div>
@@ -56,13 +56,13 @@ const App = () => {
             />
           </div>
 
-          {/* Results — scanline, heavy border */}
-          <div className="flex-1 min-w-0 overflow-hidden bg-surface-screen dark:bg-dark-surface-screen rounded-lg border-2 border-surface-border dark:border-dark-surface-border text-text-screen dark:text-dark-text-screen texture-scanlines">
-            <ResultsPanel isStale={false} result={result} />
+          {/* Results + Info — side by side on wide screens, stacked on narrow */}
+          <div className="flex-1 min-w-0 flex flex-col min-[1430px]:flex-row gap-4 overflow-hidden">
+            <div className="flex-1 min-w-0 min-h-0 overflow-hidden bg-surface-screen dark:bg-dark-surface-screen rounded-lg border-2 border-surface-border dark:border-dark-surface-border text-text-screen dark:text-dark-text-screen texture-scanlines">
+              <ResultsPanel isStale={false} result={result} />
+            </div>
+            <AnalyserInfo analyser={selectedAnalyser} />
           </div>
-
-          {/* Info — grain */}
-          <AnalyserInfo analyser={selectedAnalyser} />
         </main>
       </div>
     </div>
