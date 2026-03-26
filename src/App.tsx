@@ -2,11 +2,13 @@ import { useRef, useState } from "react";
 
 import { analysers } from "./analysis/analysers";
 import { parse } from "./analysis/parse";
+import type { AnalysisResult } from "./boundaryTypes";
+import { AnalyserInfo } from "./components/AnalyserInfo";
 import { Editor } from "./components/Editor";
-import { debounce } from "./lib/debounce";
+import { Header } from "./components/Header";
 import { ResultsPanel } from "./components/ResultsPanel";
 import { Toolbar } from "./components/Toolbar";
-import type { AnalysisResult } from "./boundaryTypes";
+import { debounce } from "./lib/debounce";
 
 const persistText = (text: string) => {
   localStorage.setItem("text", text);
@@ -32,29 +34,37 @@ const App = () => {
     setResult({ highlights, text, activeAnalyserId: selectedAnalyserId });
   };
 
-  return (
-    <div className="h-screen flex flex-col bg-gray-50 text-gray-900 dark:bg-gray-950 dark:text-gray-100">
-      <header className="border-b border-gray-200 dark:border-gray-800 px-6 py-3">
-        <h1 className="text-xl font-bold tracking-tight">NitPick</h1>
-      </header>
+  const selectedAnalyser = analysers.find((a) => a.id === selectedAnalyserId);
 
-      <main className="flex-1 flex flex-col md:flex-row overflow-hidden">
-        <div className="flex flex-col md:w-[45%] md:max-w-xl border-b md:border-b-0 md:border-r border-gray-200 dark:border-gray-800">
-          <div className="flex-1 min-h-[150px] p-4">
-            <Editor text={text} onChange={onTextChange} />
+  return (
+    <div className="h-screen flex flex-col bg-surface dark:bg-dark-surface text-text dark:text-dark-text font-mono">
+      <div className="app w-full mx-auto flex flex-col flex-1 overflow-hidden lg:p-8 xl:p-10">
+        <Header />
+
+        <main className="flex-1 flex gap-4 overflow-hidden p-4 pt-4">
+          {/* Editor — grain, light border */}
+          <div className="flex flex-col w-[40%] max-w-[480px] min-w-0 overflow-hidden bg-surface-raised dark:bg-dark-surface-raised rounded-lg border border-dashed border-surface-border dark:border-dark-surface-border texture-grain">
+            <div className="flex-1 min-h-0 p-5">
+              <Editor text={text} onChange={onTextChange} />
+            </div>
+            <Toolbar
+              analysers={analysers}
+              selectedAnalyserId={selectedAnalyserId}
+              onSelect={setSelectedAnalyserId}
+              onAnalyse={handleAnalyze}
+              canAnalyse={!!text.trim()}
+            />
           </div>
-          <Toolbar
-            analysers={analysers}
-            selectedAnalyserId={selectedAnalyserId}
-            onSelect={setSelectedAnalyserId}
-            onAnalyse={handleAnalyze}
-            canAnalyse={!!text.trim()}
-          />
-        </div>
-        <div className="flex-1 overflow-hidden">
-          <ResultsPanel isStale={false} result={result} />
-        </div>
-      </main>
+
+          {/* Results + Info — side by side on wide screens, stacked on narrow */}
+          <div className="flex-1 min-w-0 flex flex-col min-[1430px]:flex-row gap-4 overflow-hidden">
+            <div className="flex-1 min-w-0 min-h-0 overflow-hidden bg-surface-screen dark:bg-dark-surface-screen rounded-lg border-2 border-surface-border dark:border-dark-surface-border text-text-screen dark:text-dark-text-screen texture-scanlines">
+              <ResultsPanel isStale={false} result={result} />
+            </div>
+            <AnalyserInfo analyser={selectedAnalyser} />
+          </div>
+        </main>
+      </div>
     </div>
   );
 };

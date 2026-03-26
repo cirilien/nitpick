@@ -14,8 +14,8 @@
 //   a bit, a little, kind of, sort of
 
 import type { Root } from "nlcst";
-import { visit } from "unist-util-visit";
 import { toString as nlcstToString } from "nlcst-to-string";
+import { visit } from "unist-util-visit";
 import type { Highlight } from "../../boundaryTypes";
 import { highlightOffsets } from "../highlightOffsets";
 
