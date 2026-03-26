@@ -47,7 +47,7 @@ export function Toolbar({
 	canAnalyse,
 }: ToolbarProps) {
 	return (
-		<div className="flex flex-col gap-3 px-6 py-4 border-t border-surface-border dark:border-dark-surface-border bg-surface-raised dark:bg-dark-surface-raised">
+		<div className="flex flex-col gap-3 px-5 py-4 border-t border-surface-border dark:border-dark-surface-border">
 			<div className="flex items-center gap-3 flex-wrap">
 				{analysers.map((analyser) => (
 					<AnalyserOption

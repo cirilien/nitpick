@@ -10,7 +10,7 @@ export function ResultsPanel({ result, isStale }: ResultsPanelProps) {
 	if (!result) {
 		return (
 			<div className="h-full flex items-center justify-center">
-				<p className="text-text-muted dark:text-dark-text-muted text-center">
+				<p className="text-text-screen-muted dark:text-dark-text-screen-muted text-center text-sm">
 					Choose an analysis mode and press Analyze.
 				</p>
 			</div>
@@ -24,12 +24,12 @@ export function ResultsPanel({ result, isStale }: ResultsPanelProps) {
 				</div>
 			)}
 
-			<div className="px-4 py-2 text-sm text-text-muted dark:text-dark-text-muted border-b border-surface-border dark:border-dark-surface-border">
+			<div className="px-5 py-2.5 text-xs text-text-screen-muted dark:text-dark-text-screen-muted border-b border-surface-border dark:border-dark-surface-border">
 				{result.highlights.length} nitpick
 				{result.highlights.length !== 1 && "s"} found
 			</div>
 
-			<div className="flex-1 overflow-y-auto p-4 text-base leading-relaxed font-serif">
+			<div className="flex-1 overflow-y-auto p-5 text-base leading-relaxed font-serif">
 				<HighlightedText
 					text={result.text}
 					highlights={result.highlights}

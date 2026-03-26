@@ -10,12 +10,12 @@ export function AnalyserInfo({ analyser }: AnalyserInfoProps) {
 
 	return (
 		<aside
-			className={`border-l border-surface-border dark:border-dark-surface-border bg-surface-raised dark:bg-dark-surface-raised transition-all duration-200 ${collapsed ? "w-10" : "w-72"} shrink-0 flex flex-col`}
+			className={`bg-surface-raised dark:bg-dark-surface-raised rounded-lg border border-surface-border dark:border-dark-surface-border transition-all duration-200 texture-grain ${collapsed ? "w-12" : "w-72"} shrink-0 flex flex-col`}
 		>
 			<button
 				type="button"
 				onClick={() => setCollapsed(!collapsed)}
-				className="p-2 text-text-muted dark:text-dark-text-muted hover:text-text dark:hover:text-dark-text text-xs self-end"
+				className="p-3 text-text-muted dark:text-dark-text-muted hover:text-text dark:hover:text-dark-text text-xs self-end"
 				title={collapsed ? "Show info" : "Hide info"}
 			>
 				{collapsed ? "◀" : "▶"}
@@ -29,7 +29,9 @@ export function AnalyserInfo({ analyser }: AnalyserInfoProps) {
 					<p className="text-text-muted dark:text-dark-text-muted text-xs mb-3">
 						{analyser.description}
 					</p>
-					<p className="leading-relaxed font-serif">{analyser.detail}</p>
+					<p className="leading-relaxed font-serif">
+						{analyser.detail}
+					</p>
 				</div>
 			)}
 		</aside>
