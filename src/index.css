@@ -14,6 +14,7 @@
 	--color-text-screen-muted: #7a756e;
 	--color-accent: #c4582a;
 	--color-accent-hover: #a84820;
+	--color-accent-warm: #d4a030;
 
 	/* Dark mode palette */
 	--color-dark-surface: #1a1f1a;
@@ -26,6 +27,7 @@
 	--color-dark-text-screen-muted: #6a7a60;
 	--color-dark-accent: #d4714a;
 	--color-dark-accent-hover: #e07f58;
+	--color-dark-accent-warm: #e0b044;
 
 	/* Fonts */
 	--font-serif: var(--font-pairing-serif), Georgia, serif;
@@ -37,13 +39,23 @@
 	--font-pairing-mono: "Space Mono";
 }
 
+.app {
+	max-width: 1400px;
+}
+
 @keyframes blink {
 	0%, 100% { opacity: 1; }
 	50% { opacity: 0; }
 }
 
+
 .animate-blink {
 	animation: blink 0.8s step-end 4;
+}
+
+/* Rough-edged header — ink block silhouette */
+.header-rough {
+	clip-path: url(#header-rough-edge);
 }
 
 /* grain texture */

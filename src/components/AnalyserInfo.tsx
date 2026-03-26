@@ -10,7 +10,7 @@ export function AnalyserInfo({ analyser }: AnalyserInfoProps) {
 
 	return (
 		<aside
-			className={`bg-surface-raised dark:bg-dark-surface-raised rounded-lg border border-surface-border dark:border-dark-surface-border transition-all duration-200 texture-grain ${collapsed ? "w-12" : "w-72"} shrink-0 flex flex-col`}
+			className={`bg-surface-raised dark:bg-dark-surface-raised rounded-lg border border-dashed border-surface-border dark:border-dark-surface-border transition-all duration-200 texture-grain ${collapsed ? "w-12" : "w-72"} shrink-0 flex flex-col`}
 		>
 			<button
 				type="button"
