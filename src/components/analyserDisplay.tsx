@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { useTheme } from "./ThemeContext";
 import { getCategoryColor } from "./categoryStyles";
 
 export interface AnalyserDisplay {
@@ -8,10 +9,11 @@ export interface AnalyserDisplay {
 }
 
 function ColorSwatch({ category }: { category: string }) {
+  const { isDark } = useTheme();
   return (
     <span
       className="inline-block w-3 h-3 rounded-sm align-middle mr-1.5"
-      style={{ backgroundColor: getCategoryColor(category, false) }}
+      style={{ backgroundColor: getCategoryColor(category, isDark) }}
     />
   );
 }

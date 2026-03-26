@@ -1,5 +1,6 @@
 import type { Highlight } from "../boundaryTypes";
 import { getCategoryColor } from "./categoryStyles";
+import { useTheme } from "./ThemeContext";
 
 type HighlightedTextProps = {
   text: string;
@@ -7,11 +8,11 @@ type HighlightedTextProps = {
 };
 
 export function HighlightedText({ text, highlights }: HighlightedTextProps) {
+  const { isDark } = useTheme();
+
   if (highlights.length === 0) {
     return <span className="whitespace-pre-wrap">{text}</span>;
   }
-
-  const isDark = document.documentElement.classList.contains("dark");
   const sorted = highlights.toSorted((a, b) => a.start - b.start);
   const parts: React.ReactNode[] = [];
 
