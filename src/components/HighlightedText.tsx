@@ -1,4 +1,5 @@
 import type { Highlight } from "../boundaryTypes";
+import { getCategoryColor } from "./categoryStyles";
 
 type HighlightedTextProps = {
   text: string;
@@ -10,6 +11,7 @@ export function HighlightedText({ text, highlights }: HighlightedTextProps) {
     return <span className="whitespace-pre-wrap">{text}</span>;
   }
 
+  const isDark = document.documentElement.classList.contains("dark");
   const sorted = highlights.toSorted((a, b) => a.start - b.start);
   const parts: React.ReactNode[] = [];
 
@@ -22,7 +24,10 @@ export function HighlightedText({ text, highlights }: HighlightedTextProps) {
       <mark
         key={`${h.start}-${h.end}`}
         title={h.label}
-        style={{ backgroundColor: "palegreen", borderRadius: "2px" }}
+        style={{
+          backgroundColor: getCategoryColor(h.category, isDark),
+          borderRadius: "2px",
+        }}
         className="px-0.5 cursor-help"
       >
         {text.slice(h.start, h.end)}

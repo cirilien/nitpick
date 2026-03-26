@@ -1,0 +1,51 @@
+import type { ReactNode } from "react";
+import { getCategoryColor } from "./categoryStyles";
+
+export interface AnalyserDisplay {
+  name: string;
+  description: string;
+  detail: ReactNode;
+}
+
+function ColorSwatch({ category }: { category: string }) {
+  return (
+    <span
+      className="inline-block w-3 h-3 rounded-sm align-middle mr-1.5"
+      style={{ backgroundColor: getCategoryColor(category, false) }}
+    />
+  );
+}
+
+export const analyserDisplay: Record<string, AnalyserDisplay> = {
+  "weasel-words": {
+    name: "Weasel Words",
+    description: "Hedging and filler words",
+    detail: (
+      <div className="space-y-2">
+        <p>
+          Words like &lsquo;very&rsquo;, &lsquo;really&rsquo;,
+          &lsquo;just&rsquo; often don&rsquo;t add much. These flags give you
+          the opportunity to examine whether you are hedging instead of
+          committing, or if a more specific word choice would be stronger.
+          Sometimes they can be cut entirely and the sentence is better for it.
+        </p>
+        <ul className="text-xs text-text-muted dark:text-dark-text-muted space-y-1 mt-2">
+          <li>
+            <ColorSwatch category="weasel_filler" />
+            Filler &amp; hedge words
+          </li>
+          <li>
+            <ColorSwatch category="weasel_stance" />
+            Narrator stance &amp; certainty words
+          </li>
+        </ul>
+      </div>
+    ),
+  },
+  "weak-phrases": {
+    name: "Weak Phrases",
+    description: "Filler and roundabout phrasing",
+    detail:
+      "Phrases like 'in order to', 'due to the fact that', and 'it is important to note' pad sentences and reduce punch. Tightening often makes prose clearer, but the cost can be rhythm or tone.",
+  },
+};

@@ -1,8 +1,8 @@
 import { useState } from "react";
-import type { Analyser } from "../analysis/analysers";
+import type { AnalyserDisplay } from "./analyserDisplay";
 
 interface AnalyserInfoProps {
-  analyser: Analyser | undefined;
+  analyser: AnalyserDisplay | undefined;
 }
 
 export function AnalyserInfo({ analyser }: AnalyserInfoProps) {
@@ -27,7 +27,7 @@ export function AnalyserInfo({ analyser }: AnalyserInfoProps) {
           <p className="text-text-muted dark:text-dark-text-muted text-xs mb-3">
             {analyser.description}
           </p>
-          <p className="leading-relaxed font-serif">{analyser.detail}</p>
+          <div className="leading-relaxed font-serif">{analyser.detail}</div>
         </div>
       )}
     </aside>

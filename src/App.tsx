@@ -4,6 +4,7 @@ import { analysers } from "./analysis/analysers";
 import { parse } from "./analysis/parse";
 import type { AnalysisResult } from "./boundaryTypes";
 import { AnalyserInfo } from "./components/AnalyserInfo";
+import { analyserDisplay } from "./components/analyserDisplay";
 import { Editor } from "./components/Editor";
 import { Header } from "./components/Header";
 import { ResultsPanel } from "./components/ResultsPanel";
@@ -13,6 +14,11 @@ import { debounce } from "./lib/debounce";
 const persistText = (text: string) => {
   localStorage.setItem("text", text);
 };
+
+const toolbarOptions = analysers.map((a) => ({
+  id: a.id,
+  ...analyserDisplay[a.id],
+}));
 
 const App = () => {
   const [text, setText] = useState(localStorage.getItem("text") || "");
@@ -36,9 +42,8 @@ const App = () => {
 
   const isStale = result !== null && text !== result.text;
 
-  const selectedAnalyser = analysers.find((a) =>
-    result ? a.id === result.activeAnalyserId : a.id === selectedAnalyserId,
-  );
+  const displayId = result ? result.activeAnalyserId : selectedAnalyserId;
+  const selectedDisplay = analyserDisplay[displayId];
 
   return (
     <div className="h-screen flex flex-col bg-surface dark:bg-dark-surface text-text dark:text-dark-text font-mono">
@@ -52,7 +57,7 @@ const App = () => {
               <Editor text={text} onChange={onTextChange} />
             </div>
             <Toolbar
-              analysers={analysers}
+              analysers={toolbarOptions}
               selectedAnalyserId={selectedAnalyserId}
               onSelect={setSelectedAnalyserId}
               onAnalyse={handleAnalyze}
@@ -65,7 +70,7 @@ const App = () => {
             <div className="flex-1 min-w-0 min-h-0 overflow-hidden bg-surface-screen dark:bg-dark-surface-screen rounded-lg border-2 border-surface-border dark:border-dark-surface-border text-text-screen dark:text-dark-text-screen texture-scanlines">
               <ResultsPanel isStale={isStale} result={result} />
             </div>
-            <AnalyserInfo analyser={selectedAnalyser} />
+            <AnalyserInfo analyser={selectedDisplay} />
           </div>
         </main>
       </div>

@@ -1,7 +1,11 @@
-import type { Analyser } from "../analysis/analysers";
+interface AnalyserOption {
+  id: string;
+  name: string;
+  description: string;
+}
 
 interface ToolbarProps {
-  analysers: Analyser[];
+  analysers: AnalyserOption[];
   selectedAnalyserId: string;
   onSelect: (id: string) => void;
   onAnalyse: () => void;
@@ -16,7 +20,7 @@ interface AnalyserOptionProps {
   onSelect: (id: string) => void;
 }
 
-const AnalyserOption = ({
+const AnalyserOptionItem = ({
   id,
   name,
   description,
@@ -50,7 +54,7 @@ export function Toolbar({
     <div className="flex flex-col gap-3 px-5 py-4 border-t border-surface-border dark:border-dark-surface-border min-w-0">
       <div className="flex items-center gap-3 flex-wrap">
         {analysers.map((analyser) => (
-          <AnalyserOption
+          <AnalyserOptionItem
             key={analyser.id}
             {...analyser}
             selectedAnalyserId={selectedAnalyserId}
