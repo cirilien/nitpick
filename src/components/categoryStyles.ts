@@ -1,6 +1,7 @@
 const CATEGORY_COLORS: Record<string, { light: string; dark: string }> = {
   weasel_filler: { light: "#f6e4a8", dark: "#ce9c23" },
   weasel_stance: { light: "#c8e6c0", dark: "#48ab73" },
+  repetition: { light: "#d4c5f0", dark: "#9b72cf" },
 };
 
 const FALLBACK = { light: "#e0e0e0", dark: "#bbbbbb" };

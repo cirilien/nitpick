@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 
 import { analysers } from "./analysis/analysers";
 import { parse } from "./analysis/parse";
@@ -24,6 +24,7 @@ const App = () => {
   const [text, setText] = useState(localStorage.getItem("text") || "");
   const [result, setResult] = useState<AnalysisResult | null>(null);
   const [selectedAnalyserId, setSelectedAnalyserId] = useState(analysers[0].id);
+  const [hiddenGroups, setHiddenGroups] = useState<Set<string>>(new Set());
 
   const persist = useRef(debounce(persistText, 500));
   const onTextChange = (text: string) => {
@@ -38,9 +39,43 @@ const App = () => {
     const highlights = analyser.fn(tree);
 
     setResult({ highlights, text, activeAnalyserId: selectedAnalyserId });
+    setHiddenGroups(new Set());
   };
 
   const isStale = result !== null && text !== result.text;
+
+  const groups = useMemo(() => {
+    if (!result) return new Map<string, number>();
+    const map = new Map<string, number>();
+    for (const h of result.highlights) {
+      if (h.group) map.set(h.group, (map.get(h.group) ?? 0) + 1);
+    }
+    return map;
+  }, [result]);
+
+  const filteredHighlights = useMemo(() => {
+    if (!result || hiddenGroups.size === 0) return result?.highlights ?? [];
+    return result.highlights.filter(
+      (h) => !h.group || !hiddenGroups.has(h.group),
+    );
+  }, [result, hiddenGroups]);
+
+  const handleToggleGroup = (group: string) => {
+    setHiddenGroups((prev) => {
+      const next = new Set(prev);
+      if (next.has(group)) next.delete(group);
+      else next.add(group);
+      return next;
+    });
+  };
+
+  const handleToggleAll = (show: boolean) => {
+    if (show) {
+      setHiddenGroups(new Set());
+    } else {
+      setHiddenGroups(new Set(groups.keys()));
+    }
+  };
 
   const displayId = result ? result.activeAnalyserId : selectedAnalyserId;
   const selectedDisplay = analyserDisplay[displayId];
@@ -68,9 +103,19 @@ const App = () => {
           {/* Results + Info — side by side on wide screens, stacked on narrow */}
           <div className="flex-1 min-w-0 flex flex-col min-[1430px]:flex-row gap-4 overflow-hidden">
             <div className="flex-1 min-w-0 min-h-0 overflow-hidden bg-surface-screen dark:bg-dark-surface-screen rounded-lg border-2 border-surface-border dark:border-dark-surface-border text-text-screen dark:text-dark-text-screen texture-scanlines">
-              <ResultsPanel isStale={isStale} result={result} />
+              <ResultsPanel
+                isStale={isStale}
+                result={result}
+                filteredHighlights={filteredHighlights}
+              />
             </div>
-            <AnalyserInfo analyser={selectedDisplay} />
+            <AnalyserInfo
+              analyser={selectedDisplay}
+              groups={groups}
+              hiddenGroups={hiddenGroups}
+              onToggleGroup={handleToggleGroup}
+              onToggleAll={handleToggleAll}
+            />
           </div>
         </main>
       </div>

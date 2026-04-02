@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
-import { useTheme } from "./ThemeContext";
 import { getCategoryColor } from "./categoryStyles";
+import { useTheme } from "./ThemeContext";
 
 export interface AnalyserDisplay {
   name: string;
@@ -49,5 +49,20 @@ export const analyserDisplay: Record<string, AnalyserDisplay> = {
     description: "Filler and roundabout phrasing",
     detail:
       "Phrases like 'in order to', 'due to the fact that', and 'it is important to note' pad sentences and reduce punch. Tightening often makes prose clearer, but the cost can be rhythm or tone.",
+  },
+  "word-repetition": {
+    name: "Word Repetition",
+    description: "Conspicuous repeated words",
+    detail: (
+      <div className="space-y-2">
+        <p>
+          Flags repetition within 200 words. Common words (pronouns,
+          prepositions, articles, frequent verbs) are excluded so only
+          conspicuous repetition is highlighted. Some repetition is stylistic or
+          emphatic, sometimes it is reaching for the same word because it's
+          fresh in your mind.
+        </p>
+      </div>
+    ),
   },
 };

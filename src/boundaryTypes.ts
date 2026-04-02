@@ -3,6 +3,7 @@ export interface Highlight {
   end: number;
   category: string; // TODO: maybe make this more specific later
   label: string;
+  group?: string;
 }
 
 export interface AnalysisResult {
