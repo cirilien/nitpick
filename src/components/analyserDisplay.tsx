@@ -96,12 +96,13 @@ export const analyserDisplay: Record<string, AnalyserDisplay> = {
   },
   adverbs: {
     name: "Adverbs",
-    description: "Density and reliance could be an issue",
+    description: "My beloved first draft crutch",
     detail: (
       <div className="space-y-2">
         <p>
           Adverbs aren&rsquo;t always bad, but they're often an opportunity for
-          stronger verbs or more specific description.
+          stronger verbs or more specific description. Watch for density and
+          reliance.
         </p>
         <ul className="text-xs text-text-muted dark:text-dark-text-muted space-y-1 mt-2">
           <li>
