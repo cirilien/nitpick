@@ -44,17 +44,13 @@ export const AboutDialog = () => {
             </p>
           </Section>
 
-          <Section title="Privacy &amp; Security">
+          <Section title="Privacy &amp; security">
             <p className="mb-3">
               None of your text ever leaves your browser. There's no backend and
               no tracking. Everything runs client-side in javascript. Whatever
               you paste into the textarea gets saved into localstorage in your
               browser. If that bothers you, hit that incognito button.
             </p>
-          </Section>
-
-          <Section title="Mobile support">
-            <p className="mb-3">Nope.</p>
           </Section>
 
           <Section title="Fuck AI.">
@@ -73,6 +69,19 @@ export const AboutDialog = () => {
               <Link href="https://github.com/retextjs/retext">retext.js</Link>{" "}
               to walk through the text and pattern match.
             </p>
+
+            <Section title="Word limit">
+              <p className="mb-3">
+                Nothing enforced. Some operations are more intensive than
+                others, and as this is running entirely on your device,
+                performance will depend on the hardware. I'd suggest you work
+                scene-by-scene anyway.
+              </p>
+            </Section>
+
+            <Section title="Mobile support">
+              <p className="mb-3">Nope.</p>
+            </Section>
           </Section>
         </div>
       </DialogContent>
