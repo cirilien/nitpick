@@ -50,6 +50,55 @@ export const analyserDisplay: Record<string, AnalyserDisplay> = {
     detail:
       "Phrases like 'in order to', 'due to the fact that', and 'it is important to note' pad sentences and reduce punch. Tightening often makes prose clearer, but the cost can be rhythm or tone.",
   },
+  "filter-words": {
+    name: "Filtering",
+    description: "Perception and cognition verbs that distance the reader",
+    detail: (
+      <div className="space-y-2">
+        <p>
+          Clusters of this pattern can introduce distance by filtering a scene
+          through the character&rsquo;s perception instead of letting the reader
+          experience it directly. &ldquo;She heard the floorboard creak&rdquo;
+          vs &ldquo;The floorboard creaked.&rdquo; Here filters are grouped by
+          sense, so you can identify if you need to diversify.
+        </p>
+        <ul className="text-xs text-text-muted dark:text-dark-text-muted space-y-1 mt-2">
+          <li>
+            <ColorSwatch category="filter_sight" />
+            Sight
+          </li>
+          <li>
+            <ColorSwatch category="filter_sound" />
+            Sound
+          </li>
+          <li>
+            <ColorSwatch category="filter_touch" />
+            Touch
+          </li>
+          <li>
+            <ColorSwatch category="filter_smell" />
+            Smell
+          </li>
+          <li>
+            <ColorSwatch category="filter_taste" />
+            Taste
+          </li>
+          <li>
+            <ColorSwatch category="filter_cognition" />
+            Cognition
+          </li>
+          <li>
+            <ColorSwatch category="filter_emotion" />
+            Emotion
+          </li>
+          <li>
+            <ColorSwatch category="filter_seeming" />
+            Seeming
+          </li>
+        </ul>
+      </div>
+    ),
+  },
   "word-repetition": {
     name: "Word Repetition",
     description: "Conspicuous repeated words",
