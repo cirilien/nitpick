@@ -8,7 +8,6 @@ import {
 interface AnalyserOption {
   id: string;
   name: string;
-  description: string;
 }
 
 interface ToolbarProps {
@@ -24,7 +23,6 @@ interface ToolbarProps {
 interface AnalyserOptionProps {
   id: string;
   name: string;
-  description: string;
   selectedAnalyserId: string;
   onSelect: (id: string) => void;
 }
@@ -32,7 +30,6 @@ interface AnalyserOptionProps {
 const AnalyserOptionItem = ({
   id,
   name,
-  description,
   selectedAnalyserId,
   onSelect,
 }: AnalyserOptionProps) => (
@@ -46,9 +43,6 @@ const AnalyserOptionItem = ({
       className="accent-accent dark:accent-dark-accent"
     />
     <span className="font-medium">{name}</span>
-    <span className="text-text-muted dark:text-dark-text-muted hidden sm:inline">
-      — {description}
-    </span>
   </label>
 );
 
@@ -63,7 +57,7 @@ export function Toolbar({
 }: ToolbarProps) {
   return (
     <div className="flex flex-col gap-3 px-5 py-4 border-t border-surface-border dark:border-dark-surface-border min-w-0">
-      <div className="flex items-center gap-3 flex-wrap">
+      <div className="flex flex-col items-start gap-3 flex-wrap">
         {analysers.map((analyser) => (
           <AnalyserOptionItem
             key={analyser.id}
@@ -90,8 +84,8 @@ export function Toolbar({
               Ignore dialogue
             </TooltipTrigger>
             <TooltipContent>
-              Hide matches inside &quot;double&quot; or {"\u201C"}curly
-              double{"\u201D"} quotes
+              Hide matches inside &quot;double&quot; or {"\u201C"}curly double
+              {"\u201D"} quotes
             </TooltipContent>
           </Tooltip>
         </TooltipProvider>
