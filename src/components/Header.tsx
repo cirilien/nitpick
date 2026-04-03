@@ -23,8 +23,8 @@ export const Header = () => {
             <span className="inline-block w-[0.55em] h-[0.15em] bg-surface dark:bg-dark-surface ml-0.5 animate-blink align-baseline" />
           </h1>
           <p className="text-sm text-surface/70 dark:text-dark-surface/70 mt-1">
-            Programmatic line-editing tools for fiction. No AI, no opinions —
-            just patterns worth a second look.
+            Programatic line-editing tools for fiction. No AI bullshit, just
+            patterns you might want to double check.
           </p>
         </div>
         <ThemeToggle />

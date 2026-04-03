@@ -56,10 +56,10 @@ export const analyserDisplay: Record<string, AnalyserDisplay> = {
     detail: (
       <div className="space-y-2">
         <p>
-          Clusters of this pattern can introduce distance by filtering a scene
+          Clusters of these words introduce distance by filtering a scene
           through the character&rsquo;s perception instead of letting the reader
           experience it directly. &ldquo;She heard the floorboard creak&rdquo;
-          vs &ldquo;The floorboard creaked.&rdquo; Here filters are grouped by
+          vs &ldquo;The floorboard creaked.&rdquo; Here, filters are grouped by
           sense, so you can identify if you need to diversify.
         </p>
         <ul className="text-xs text-text-muted dark:text-dark-text-muted space-y-1 mt-2">
