@@ -1,6 +1,10 @@
 import { useMemo, useRef, useState } from "react";
 
 import { analysers } from "./analysis/analysers";
+import {
+  findDialogueRanges,
+  overlapsDialogue,
+} from "./analysis/dialogueRanges";
 import { parse } from "./analysis/parse";
 import type { AnalysisResult } from "./boundaryTypes";
 import { AnalyserInfo } from "./components/AnalyserInfo";
@@ -25,6 +29,7 @@ const App = () => {
   const [result, setResult] = useState<AnalysisResult | null>(null);
   const [selectedAnalyserId, setSelectedAnalyserId] = useState(analysers[0].id);
   const [hiddenGroups, setHiddenGroups] = useState<Set<string>>(new Set());
+  const [ignoreDialogue, setIgnoreDialogue] = useState(false);
 
   const persist = useRef(debounce(persistText, 500));
   const onTextChange = (text: string) => {
@@ -53,12 +58,22 @@ const App = () => {
     return map;
   }, [result]);
 
+  const dialogueRanges = useMemo(
+    () => (result && ignoreDialogue ? findDialogueRanges(result.text) : []),
+    [result, ignoreDialogue],
+  );
+
   const filteredHighlights = useMemo(() => {
-    if (!result || hiddenGroups.size === 0) return result?.highlights ?? [];
-    return result.highlights.filter(
-      (h) => !h.group || !hiddenGroups.has(h.group),
-    );
-  }, [result, hiddenGroups]);
+    if (!result) return [];
+    let hl = result.highlights;
+    if (ignoreDialogue && dialogueRanges.length > 0) {
+      hl = hl.filter((h) => !overlapsDialogue(h, dialogueRanges));
+    }
+    if (hiddenGroups.size > 0) {
+      hl = hl.filter((h) => !h.group || !hiddenGroups.has(h.group));
+    }
+    return hl;
+  }, [result, hiddenGroups, ignoreDialogue, dialogueRanges]);
 
   const handleToggleGroup = (group: string) => {
     setHiddenGroups((prev) => {
@@ -97,6 +112,8 @@ const App = () => {
               onSelect={setSelectedAnalyserId}
               onAnalyse={handleAnalyze}
               canAnalyse={!!text.trim()}
+              ignoreDialogue={ignoreDialogue}
+              onToggleDialogue={() => setIgnoreDialogue((prev) => !prev)}
             />
           </div>
 

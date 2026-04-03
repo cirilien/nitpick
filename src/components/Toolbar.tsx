@@ -1,3 +1,10 @@
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "./ui/tooltip";
+
 interface AnalyserOption {
   id: string;
   name: string;
@@ -10,6 +17,8 @@ interface ToolbarProps {
   onSelect: (id: string) => void;
   onAnalyse: () => void;
   canAnalyse: boolean;
+  ignoreDialogue: boolean;
+  onToggleDialogue: () => void;
 }
 
 interface AnalyserOptionProps {
@@ -49,6 +58,8 @@ export function Toolbar({
   onSelect,
   onAnalyse,
   canAnalyse,
+  ignoreDialogue,
+  onToggleDialogue,
 }: ToolbarProps) {
   return (
     <div className="flex flex-col gap-3 px-5 py-4 border-t border-surface-border dark:border-dark-surface-border min-w-0">
@@ -62,6 +73,29 @@ export function Toolbar({
           />
         ))}
       </div>
+      <label className="flex items-center gap-1.5 text-sm cursor-pointer">
+        <input
+          type="checkbox"
+          checked={ignoreDialogue}
+          onChange={onToggleDialogue}
+          className="accent-accent dark:accent-dark-accent"
+        />
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger
+              render={
+                <span className="underline decoration-dotted underline-offset-2" />
+              }
+            >
+              Ignore dialogue
+            </TooltipTrigger>
+            <TooltipContent>
+              Hide matches inside &quot;double&quot; or {"\u201C"}curly
+              double{"\u201D"} quotes
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+      </label>
       <button
         type="button"
         onClick={onAnalyse}
