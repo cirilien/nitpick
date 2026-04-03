@@ -21,15 +21,15 @@ function ColorSwatch({ category }: { category: string }) {
 export const analyserDisplay: Record<string, AnalyserDisplay> = {
   "weasel-words": {
     name: "Weasel Words",
-    description: "Hedging and filler words",
+    description: "You might be pulling your punches",
     detail: (
       <div className="space-y-2">
         <p>
           Words like &lsquo;very&rsquo;, &lsquo;really&rsquo;,
-          &lsquo;just&rsquo; often don&rsquo;t add much. These flags give you
-          the opportunity to examine whether you are hedging instead of
-          committing, or if a more specific word choice would be stronger.
-          Sometimes they can be cut entirely and the sentence is better for it.
+          &lsquo;just&rsquo; rarely add much. Examine whether you are hedging
+          instead of committing, or if a more specific word choice would be
+          stronger. Sometimes they can be cut entirely and the sentence is
+          better for it.
         </p>
         <ul className="text-xs text-text-muted dark:text-dark-text-muted space-y-1 mt-2">
           <li>
@@ -44,15 +44,10 @@ export const analyserDisplay: Record<string, AnalyserDisplay> = {
       </div>
     ),
   },
-  "weak-phrases": {
-    name: "Weak Phrases",
-    description: "Filler and roundabout phrasing",
-    detail:
-      "Phrases like 'in order to', 'due to the fact that', and 'it is important to note' pad sentences and reduce punch. Tightening often makes prose clearer, but the cost can be rhythm or tone.",
-  },
   "filter-words": {
     name: "Filtering",
-    description: "Perception and cognition verbs that distance the reader",
+    description:
+      "In case you want your POV character so close they can feel your breath on their neck",
     detail: (
       <div className="space-y-2">
         <p>
@@ -99,9 +94,31 @@ export const analyserDisplay: Record<string, AnalyserDisplay> = {
       </div>
     ),
   },
+  adverbs: {
+    name: "Adverbs",
+    description: "Density and reliance could be an issue",
+    detail: (
+      <div className="space-y-2">
+        <p>
+          Adverbs aren&rsquo;t always bad, but they're often an opportunity for
+          stronger verbs or more specific description.
+        </p>
+        <ul className="text-xs text-text-muted dark:text-dark-text-muted space-y-1 mt-2">
+          <li>
+            <ColorSwatch category="adverb_ly" />
+            -ly adverbs
+          </li>
+          <li>
+            <ColorSwatch category="adverb_irregular" />
+            Irregular adverbs (always, never, almost&hellip;)
+          </li>
+        </ul>
+      </div>
+    ),
+  },
   "word-repetition": {
     name: "Word Repetition",
-    description: "Conspicuous repeated words",
+    description: "The kind that might throw off your rhythm",
     detail: (
       <div className="space-y-2">
         <p>

@@ -10,6 +10,8 @@ const CATEGORY_COLORS: Record<string, { light: string; dark: string }> = {
   filter_cognition: { light: "#ffe082", dark: "#d4a017" },
   filter_emotion: { light: "#d5c4e6", dark: "#9a7bb5" },
   filter_seeming: { light: "#cfd8dc", dark: "#90a4ae" },
+  adverb_ly: { light: "#f0c4a8", dark: "#d4845a" },
+  adverb_irregular: { light: "#c4d8a8", dark: "#8aad5a" },
 };
 
 const FALLBACK = { light: "#e0e0e0", dark: "#bbbbbb" };
