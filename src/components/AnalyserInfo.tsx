@@ -32,7 +32,7 @@ export function AnalyserInfo({
 
   return (
     <aside
-      className={`bg-surface-raised dark:bg-dark-surface-raised rounded-lg border border-dashed border-surface-border dark:border-dark-surface-border transition-all duration-200 texture-grain flex flex-col shrink-0 ${collapsed ? "min-[1430px]:w-12" : "min-[1430px]:w-62"}`}
+      className={`bg-surface-raised dark:bg-dark-surface-raised rounded-lg border border-dashed border-surface-border dark:border-dark-surface-border flex flex-col shrink-0 ${collapsed ? "min-[1430px]:w-12" : "min-[1430px]:w-62"}`}
     >
       <button
         type="button"
