@@ -14,7 +14,7 @@ export const Header = () => {
         </h1>
         <p className="text-sm text-surface/70 dark:text-dark-surface/70 mt-1">
           Privacy-first, programatic line-editing tools for fiction. No AI
-          bullshit, just patterns you might want to double check.{" "}
+          bullshit.{" "}
           <AboutDialog />
         </p>
       </div>
